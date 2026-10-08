@@ -41,6 +41,11 @@ function receive({data:packet}){
 for(const preset of PRESETS){const label=document.createElement('label');label.className='preset';const input=document.createElement('input');input.type='radio';input.name='preset';input.value=preset.id;input.checked=preset.id==='short';const text=document.createElement('span');text.append(document.createTextNode(preset.label));const small=document.createElement('small');small.textContent=preset.description;text.append(small);label.append(input,text);$('presets').append(label);}
 $('number').addEventListener('input',()=>{$('digit-count').textContent=fmt.format($('number').value.trim().length)+' 位';clearResult();});
 $('digit-count').textContent=fmt.format($('number').value.trim().length)+' 位';
+document.querySelector('section.hero').addEventListener('click',()=>{
+  if(window.matchMedia('(max-width: 680px)').matches){
+    document.querySelector('.input-panel').scrollIntoView({block:'start',behavior:'smooth'});
+  }
+});
 document.querySelectorAll('[data-number]').forEach(button=>button.addEventListener('click',()=>{$('number').value=button.dataset.number;$('number').dispatchEvent(new Event('input'));$('number').focus();}));
 $('number').addEventListener('keydown',event=>{if((event.ctrlKey||event.metaKey)&&event.key==='Enter'){event.preventDefault();$('form').requestSubmit();}});
 $('form').addEventListener('submit',event=>{
